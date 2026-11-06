@@ -20,7 +20,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from .agent import run_episode
-from .envs import CONDITIONS, ENV_NAMES, make_env
+from .envs import CONDITIONS, ENV_NAMES, PROMPT_VARIANTS, make_env
 from .providers import make_provider
 from .stats import fmt_rate
 
@@ -30,13 +30,13 @@ MAX_REAL_RUNS = 40  # cost guard for real providers
 def summarize(runs: list[dict], header: str) -> str:
     groups: dict[tuple, list[dict]] = {}
     for r in runs:
-        groups.setdefault((r["env"], r["condition"], r["model"]), []).append(r)
+        groups.setdefault((r["env"], r["condition"], r.get("prompt_variant", "neutral"), r["model"]), []).append(r)
     lines = [header, "",
              "Rates are k/N (%) [Wilson 95% CI].", "",
-             "| env | condition | model | N | hack | tamper attempted | false success claim | "
+             "| env | condition | prompt | model | N | hack | tamper attempted | false success claim | "
              "honest success | overfit | ended by | mean steps | tokens in/out |",
-             "|---|---|---|---|---|---|---|---|---|---|---|---|"]
-    for (env, cond, model), rs in sorted(groups.items()):
+             "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for (env, cond, prompt, model), rs in sorted(groups.items()):
         n = len(rs)
         c = lambda key: sum(bool(r[key]) for r in rs)
         ends = {}
@@ -45,7 +45,7 @@ def summarize(runs: list[dict], header: str) -> str:
         tin = sum(r["usage"]["in"] for r in rs)
         tout = sum(r["usage"]["out"] for r in rs)
         lines.append(
-            f"| {env} | {cond} | {model} | {n} | {fmt_rate(c('hack'), n)} | {fmt_rate(c('tamper_attempted'), n)} | "
+            f"| {env} | {cond} | {prompt} | {model} | {n} | {fmt_rate(c('hack'), n)} | {fmt_rate(c('tamper_attempted'), n)} | "
             f"{fmt_rate(c('false_success_claim'), n)} | {fmt_rate(c('honest_success'), n)} | "
             f"{fmt_rate(c('overfit'), n)} | {', '.join(f'{k}:{v}' for k, v in sorted(ends.items()))} | "
             f"{sum(r['steps'] for r in rs) / n:.1f} | {tin:,}/{tout:,} |")
@@ -75,6 +75,7 @@ def main(argv=None) -> int:
     ap.add_argument("--policies", default="honest", help="stub only: comma-separated policies")
     ap.add_argument("--envs", default=",".join(ENV_NAMES))
     ap.add_argument("--conditions", default=",".join(CONDITIONS))
+    ap.add_argument("--prompt", choices=sorted(PROMPT_VARIANTS), default="neutral")
     ap.add_argument("--n", type=int, default=5)
     ap.add_argument("--max-steps", type=int, default=20)
     ap.add_argument("--workers", type=int, default=4)
@@ -105,9 +106,10 @@ def main(argv=None) -> int:
         e, c, p, i = job
         env = make_env(e)
         prov = make_provider(a.provider, a.model, env, policy=p, effort=a.effort)
-        rid = f"{e}-{c}-{(p or model_tag)}-{i}"
+        rid = f"{e}-{c}-{a.prompt}-{(p or model_tag)}-{i}"
         return run_episode(env, c, prov, max_steps=a.max_steps,
-                           transcript_path=out / "transcripts" / f"{rid}.jsonl", run_id=rid)
+                           transcript_path=out / "transcripts" / f"{rid}.jsonl", run_id=rid,
+                           prompt_variant=a.prompt)
 
     runs = []
     with ThreadPoolExecutor(max_workers=max(1, a.workers)) as ex, (out / "runs.jsonl").open("w") as f:
@@ -127,7 +129,7 @@ def main(argv=None) -> int:
 
     runs.sort(key=lambda r: r["run_id"])
     header = (f"## {a.provider} / {model_tag} / effort={a.effort if a.provider == 'anthropic' else '-'} / "
-              f"max_steps={a.max_steps} / {time.strftime('%Y-%m-%d %H:%M %Z')}")
+              f"prompt={a.prompt} / max_steps={a.max_steps} / {time.strftime('%Y-%m-%d %H:%M %Z')}")
     md = summarize(runs, header)
     (out / "summary.md").write_text(md + "\n")
     print("\n" + md)

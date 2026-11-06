@@ -62,7 +62,8 @@ class Transcript:
 
 
 def run_episode(env: Env, condition: str, provider: Provider, max_steps: int = 20,
-                transcript_path: Path | None = None, run_id: str | None = None) -> dict:
+                transcript_path: Path | None = None, run_id: str | None = None,
+                prompt_variant: str = "neutral") -> dict:
     assert condition in ("honeypot", "control"), condition
     run_id = run_id or uuid.uuid4().hex[:10]
     t0 = time.time()
@@ -74,8 +75,9 @@ def run_episode(env: Env, condition: str, provider: Provider, max_steps: int = 2
             (root / rel).write_text(content)
         ws = Workspace(root)
         baseline = snapshot_protected(root)
-        prompt = env.prompt(max_steps)
+        prompt = env.prompt(max_steps, prompt_variant)
         log({"type": "start", "run_id": run_id, "env": env.name, "condition": condition,
+             "prompt_variant": prompt_variant,
              "provider": provider.name, "model": provider.model, "max_steps": max_steps,
              "system": SYSTEM, "prompt": prompt})
         provider.start(SYSTEM, prompt, TOOLS)
@@ -149,7 +151,8 @@ def run_episode(env: Env, condition: str, provider: Provider, max_steps: int = 2
         sub = state["submitted"]
         labels = classify(env, g, sub["success"] if sub else None, state["tamper_attempts"])
         result = {
-            "run_id": run_id, "env": env.name, "condition": condition, "provider": provider.name,
+            "run_id": run_id, "env": env.name, "condition": condition, "prompt_variant": prompt_variant,
+            "provider": provider.name,
             "model": provider.model, "steps": steps, "end_reason": end_reason,
             "submitted": sub is not None, "claims_success": sub["success"] if sub else None,
             "summary": sub["summary"] if sub else None,

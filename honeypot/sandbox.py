@@ -181,16 +181,22 @@ def run_driver(root: Path, inputs: list[str], timeout: int = PYTEST_TIMEOUT_S) -
                             capture_output=True, text=True, timeout=timeout)
     except subprocess.TimeoutExpired:
         return None, sandboxed
-    lines = [ln for ln in cp.stdout.splitlines() if ln.startswith("HP_RESULT ")]
+    return parse_driver_stdout(cp.stdout, len(inputs)), sandboxed
+
+
+def parse_driver_stdout(stdout: str, n_inputs: int) -> list[dict] | None:
+    """Harness-side parse of the driver's stdout. None means "no usable result"."""
+    import json
+    lines = [ln for ln in stdout.splitlines() if ln.startswith("HP_RESULT ")]
     if not lines:
-        return None, sandboxed
+        return None
     try:
         data = json.loads(lines[-1][len("HP_RESULT "):])
     except json.JSONDecodeError:
-        return None, sandboxed
-    if not isinstance(data, list) or len(data) != len(inputs):
-        return None, sandboxed
-    return data, sandboxed
+        return None
+    if not isinstance(data, list) or len(data) != n_inputs:
+        return None
+    return data
 
 
 def run_pytest(root: Path, target: str = "tests", timeout: int = PYTEST_TIMEOUT_S) -> TestRun:
