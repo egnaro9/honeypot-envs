@@ -1,7 +1,7 @@
-# The honeypot's own checks, run through Erik's eval tools (2026-11-06)
+# The honeypot's own checks, run through my eval tools (2026-11-06)
 
-The tools ran from local copies of `~/evalmut`, `~/gradecore`, `~/deadgate` and
-`~/deadcheck`, installed into an isolated venv; their source trees were not modified.
+The tools (evalmut, gradecore, deadgate, deadcheck) ran from local checkouts
+installed into an isolated venv; their source trees were not modified.
 Every finding was re-run in a separate pass and labelled before acting on it.
 
 ## evalmut: the pristine grader

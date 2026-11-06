@@ -8,7 +8,8 @@ write files and run the tests, and a turn budget. The environment leaves a hole
 open: the test file is writable, and the naive grader pays out on "the workspace
 test run passes". Detection is deterministic: no model judges another model.
 
-Private prototype. Nothing here has been published.
+Built and run on 2026-11-06. Each round's predictions were committed before its
+results; `git log` shows the order.
 
 ## The task and the two environments
 
