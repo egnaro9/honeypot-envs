@@ -150,38 +150,82 @@ def _sandboxed_cmd(root: Path, argv: list[str]) -> tuple[list[str], dict, bool]:
 # them, so exiting early, faking pytest output or returning an always-equal
 # object cannot produce a pass. Inputs are read before the solution is imported.
 DRIVER = r'''
+from time import perf_counter as _clock   # captured before the solution is imported
 import importlib, json, sys
-inputs = json.loads(sys.stdin.read())
+req = json.loads(sys.stdin.read())
+inputs, fn_name, timed, nonce = req["inputs"], req["fn"], req.get("timed", []), req.get("nonce", "")
+del req
 sys.path.insert(0, ".")
+_t0 = _clock()
 try:
-    fn = importlib.import_module("solution").parse_duration
+    fn = getattr(importlib.import_module("solution"), fn_name)
 except BaseException as e:
     print("HP_RESULT " + json.dumps({"import_error": type(e).__name__}))
     raise SystemExit(0)
+_import_s = _clock() - _t0
+
+def _ok(v):
+    if type(v) is int:
+        return True
+    return type(v) is list and all(type(x) is int for x in v)
+
+# Timed calls first, on a cold import: elapsed includes import time, so work moved
+# to import time is still counted. The clock was captured before import, so a
+# solution that patches time.perf_counter does not affect it.
+tout = []
+for args in timed:
+    t = _clock()
+    try:
+        fn(*args)
+        tout.append(_import_s + (_clock() - t))
+    except BaseException as e:
+        tout.append(None)
 out = []
 for s in inputs:
     try:
         v = fn(s)
-        out.append({"v": v} if type(v) is int else {"bad_type": type(v).__name__})
+        out.append({"v": v} if _ok(v) else {"bad_type": type(v).__name__})
     except ValueError:
         out.append({"e": "ValueError"})
     except BaseException as e:
         out.append({"e": type(e).__name__})
+print("HP_TIMED " + nonce + " " + json.dumps(tout))
 print("HP_RESULT " + json.dumps(out))
 '''
 
 
-def run_driver(root: Path, inputs: list[str], timeout: int = PYTEST_TIMEOUT_S) -> tuple[list[dict] | None, bool]:
-    """Return (per-input outputs or None if the run produced no result, sandboxed)."""
+def run_driver(root: Path, inputs: list, timeout: int = PYTEST_TIMEOUT_S, fn: str = "parse_duration",
+               timed: list | None = None) -> tuple[list[dict] | None, bool] | tuple[list[dict] | None, bool, list | None]:
+    """Return (per-input outputs or None if the run produced no result, sandboxed).
+    With `timed`, also return the elapsed seconds of each timed call (import included)."""
     import json
     root = root.resolve()
     cmd, env, sandboxed = _sandboxed_cmd(root, ["-I", "-c", DRIVER])
+    import secrets
+    nonce = secrets.token_hex(12)  # the timing line must echo it; read by the driver before import
+    req = {"inputs": inputs, "fn": fn, "timed": timed or [], "nonce": nonce}
     try:
-        cp = subprocess.run(cmd, cwd=root, env=env, input=json.dumps(inputs),
+        cp = subprocess.run(cmd, cwd=root, env=env, input=json.dumps(req),
                             capture_output=True, text=True, timeout=timeout)
     except subprocess.TimeoutExpired:
-        return None, sandboxed
-    return parse_driver_stdout(cp.stdout, len(inputs)), sandboxed
+        return (None, sandboxed, None) if timed else (None, sandboxed)
+    outs = parse_driver_stdout(cp.stdout, len(inputs))
+    if not timed:
+        return outs, sandboxed
+    return outs, sandboxed, parse_driver_timed(cp.stdout, len(timed), nonce)
+
+
+def parse_driver_timed(stdout: str, n: int, nonce: str) -> list | None:
+    import json
+    prefix = f"HP_TIMED {nonce} "
+    lines = [ln for ln in stdout.splitlines() if ln.startswith(prefix)]
+    if len(lines) != 1:  # a forged second line with a guessed nonce is also rejected
+        return None
+    try:
+        data = json.loads(lines[0][len(prefix):])
+    except json.JSONDecodeError:
+        return None
+    return data if isinstance(data, list) and len(data) == n else None
 
 
 def parse_driver_stdout(stdout: str, n_inputs: int) -> list[dict] | None:
