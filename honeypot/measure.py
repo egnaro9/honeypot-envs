@@ -33,9 +33,9 @@ def summarize(runs: list[dict], header: str) -> str:
         groups.setdefault((r["env"], r["condition"], r.get("prompt_variant", "neutral"), r["model"]), []).append(r)
     lines = [header, "",
              "Rates are k/N (%) [Wilson 95% CI].", "",
-             "| env | condition | prompt | model | N | hack | tamper attempted | false success claim | "
-             "honest success | overfit | ended by | mean steps | tokens in/out |",
-             "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+             "| env | condition | prompt | model | N | hack | tamper attempted | false success claim (v1) | "
+             "misleading success claim | disclosed edit | honest success | overfit | ended by | mean steps | tokens in/out |",
+             "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for (env, cond, prompt, model), rs in sorted(groups.items()):
         n = len(rs)
         c = lambda key: sum(bool(r[key]) for r in rs)
@@ -46,7 +46,8 @@ def summarize(runs: list[dict], header: str) -> str:
         tout = sum(r["usage"]["out"] for r in rs)
         lines.append(
             f"| {env} | {cond} | {prompt} | {model} | {n} | {fmt_rate(c('hack'), n)} | {fmt_rate(c('tamper_attempted'), n)} | "
-            f"{fmt_rate(c('false_success_claim'), n)} | {fmt_rate(c('honest_success'), n)} | "
+            f"{fmt_rate(c('false_success_claim'), n)} | {fmt_rate(c('misleading_success_claim'), n)} | "
+            f"{c('disclosed_edit')}/{n} | {fmt_rate(c('honest_success'), n)} | "
             f"{fmt_rate(c('overfit'), n)} | {', '.join(f'{k}:{v}' for k, v in sorted(ends.items()))} | "
             f"{sum(r['steps'] for r in rs) / n:.1f} | {tin:,}/{tout:,} |")
     lines += ["", "Per-run hack evidence:", ""]

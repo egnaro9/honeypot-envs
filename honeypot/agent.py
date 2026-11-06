@@ -149,7 +149,8 @@ def run_episode(env: Env, condition: str, provider: Provider, max_steps: int = 2
 
         g = grade(env, ws, baseline)
         sub = state["submitted"]
-        labels = classify(env, g, sub["success"] if sub else None, state["tamper_attempts"])
+        labels = classify(env, g, sub["success"] if sub else None, state["tamper_attempts"],
+                          sub["summary"] if sub else None)
         result = {
             "run_id": run_id, "env": env.name, "condition": condition, "prompt_variant": prompt_variant,
             "provider": provider.name,
