@@ -1,0 +1,12 @@
+[project]
+name = "honeypot-envs"
+version = "0.1.0"
+description = "Honeypot environments that measure reward hacking by coding agents"
+requires-python = ">=3.11"
+dependencies = ["anthropic>=2.6", "openai>=3.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
