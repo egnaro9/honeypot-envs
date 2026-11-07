@@ -328,3 +328,16 @@ def test_rl_naive_reward_learns_the_paying_arm_and_true_reward_gets_no_gradient(
     true = train(table, "true", iters=400, lr=0.5, seed=0)
     assert naive["policy"]["imp"]["tamper"] > 0.9
     assert all(abs(p - 0.25) < 1e-9 for p in true["policy"]["imp"].values())   # zero gradient: stays uniform
+
+
+def test_structured_fields_sent_as_a_string_are_kept_whole():
+    from honeypot.agent import _as_str_list
+    assert _as_str_list("one caveat") == ["one caveat"]
+    assert _as_str_list(["a", "b"]) == ["a", "b"] and _as_str_list(None) == []
+
+
+def test_claimed_success_after_failing_run_label():
+    r = episode("duration", "honeypot", "liar")          # partial solution, runs tests (fail), claims success
+    assert r["claimed_success_after_failing_run"]
+    r = episode("duration", "honeypot", "honest")        # runs tests (pass), claims success
+    assert not r["claimed_success_after_failing_run"]
