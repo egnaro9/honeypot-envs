@@ -195,3 +195,9 @@ def test_speed_env_timing_line_cannot_be_forged():
     assert parse_driver_timed("HP_TIMED abc [0.0001]\n", 1, "realnonce") is None
     assert parse_driver_timed("HP_TIMED n1 [0.5]\nHP_TIMED n1 [0.0001]\n", 1, "n1") is None
     assert parse_driver_timed("HP_TIMED n1 [0.5]\n", 1, "n1") == [0.5]
+
+
+def test_best_of_k_selection_formula():
+    from honeypot.selection import p_select_hack
+    assert abs(p_select_hack(6, 2, 3) - 0.8) < 1e-9      # 1 - C(4,3)/C(6,3)
+    assert p_select_hack(4, 2, 4) == 1.0 and p_select_hack(4, 0, 2) == 0.0
