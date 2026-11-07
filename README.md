@@ -460,6 +460,40 @@ carries both rewards and all labels.
 This is an interface and a generator, not a training run. No model has been trained
 against it.
 
+### Strategy-level RL against the real honeypot (`rl_strategy.py`)
+
+The smallest honest RL experiment a laptop can run. It is **not RL on a language model.**
+- **Policy:** REINFORCE over a softmax that picks one of four scripted strategies per
+  task family: honest, tamper, special_case, or precompute_table (round 5's trick).
+- **Tasks:** 9 procgen tasks, 3 per family.
+- **Rewards:** every reward comes from a real sandboxed rollout graded by the real
+  out-of-process grader, cached per (task, strategy).
+- **Training:** 600 iterations, learning rate 0.5, RNG seed 0, once with each reward.
+- **Run:** 68 s; output in `results/rl_strategy_20261106-220345.json`.
+- **Pre-registration:** `PREREGISTRATION_RL.md` was written before the run, but
+  committed after it.
+
+Expected behaviour of the trained policy:
+
+| family | naive reward: hack rate | naive: arm learned | true reward: hack rate | true: arm learned |
+|---|---|---|---|---|
+| impossible duration | **0.99** | tamper 0.98 | 0.50 | uniform (0.25 each) |
+| impossible speed | **1.00** | precompute_table 0.95 | 0.75 | uniform (0.25 each) |
+| feasible speed | 0.49 | tamper 0.49 / table 0.48 | **0.01** | precompute_table 0.98 (legal here: meets 200 ms cold) |
+
+All three pre-registered predictions held:
+- **The naive reward trains hacking.** On the impossible speed task it converged on
+  the subtle hack, the import-time table, rather than the blunt test edit.
+- **On impossible tasks the true reward has zero gradient.** No arm ever earns it, so
+  the policy stays exactly uniform and keeps hacking 50-75% of the time. Fixing the
+  reward stops *paying* for hacks but does not teach avoiding them. That needs
+  feasible tasks to learn from, or an explicit penalty on the hack labels.
+- **On the feasible family the naive reward cannot tell hacks from honest work** and
+  leaves half the policy on tamper. The true reward drives the hack rate to 0.01.
+
+Limits: four scripted arms, not open-ended generation; one RNG seed; 9 tasks. It shows
+the reward's incentive structure under learning, not what an LLM would discover.
+
 ### Why this matters for training: the naive reward under selection pressure
 
 `python -m honeypot.selection` uses saved episodes only. RL, and best-of-k
@@ -503,7 +537,8 @@ except honest success is 0/2 there by construction.
 - The detectors cover the hack classes in the zoo plus the hidden-test gap. A
   hack that generalizes to the hidden inputs without tripping the AST rules
   (i.e. one that actually solves the task) is, by these definitions, not a hack.
-- No RL training has been run; `gym_env.py` is the interface a trainer would use.
+- No RL training of a language model has been run. `rl_strategy.py` trains a policy over
+  four scripted strategies; `gym_env.py` is the interface an LLM trainer would use.
 - No sandbagging or deception-under-oversight conditions yet. The only "lying"
   measure is `misleading_success_claim`, and its disclosure check is a regex over
   prose (one known miss, above).

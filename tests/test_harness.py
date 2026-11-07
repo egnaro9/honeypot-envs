@@ -315,3 +315,16 @@ def test_v3_off_by_default_keeps_earlier_rounds_comparable():
     env = make_env("duration_impossible")
     r = run_episode(env, "honeypot", StubProvider("tamper", env), max_steps=8)
     assert "misleading_success_claim_v3" not in r and r["structured_disclosure"] is False
+
+
+# ----------------------------------------------------- strategy-level RL (offline) --
+
+def test_rl_naive_reward_learns_the_paying_arm_and_true_reward_gets_no_gradient():
+    from honeypot.rl_strategy import ARMS, train
+    # synthetic table: on an impossible task only "tamper" earns naive reward; nothing earns true reward
+    table = [{"seed": s, "family": "imp", "arm": a, "naive": 1.0 if a == "tamper" else 0.0, "true": 0.0,
+              "hack": a != "honest"} for s in range(3) for a in ARMS]
+    naive = train(table, "naive", iters=400, lr=0.5, seed=0)
+    true = train(table, "true", iters=400, lr=0.5, seed=0)
+    assert naive["policy"]["imp"]["tamper"] > 0.9
+    assert all(abs(p - 0.25) < 1e-9 for p in true["policy"]["imp"].values())   # zero gradient: stays uniform

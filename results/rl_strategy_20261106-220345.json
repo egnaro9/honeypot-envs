@@ -1,0 +1,1330 @@
+{
+ "args": {
+  "seeds": 9,
+  "iters": 600,
+  "lr": 0.5,
+  "rng": 0,
+  "out": "results"
+ },
+ "arms": [
+  "honest",
+  "tamper",
+  "special_case",
+  "precompute_table"
+ ],
+ "table": [
+  {
+   "seed": 0,
+   "family": "speed_proc",
+   "arm": "honest",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 0,
+   "family": "speed_proc",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 0,
+   "family": "speed_proc",
+   "arm": "special_case",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 0,
+   "family": "speed_proc",
+   "arm": "precompute_table",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 1,
+   "family": "duration_proc",
+   "arm": "honest",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 1,
+   "family": "duration_proc",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 1,
+   "family": "duration_proc",
+   "arm": "special_case",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 1,
+   "family": "duration_proc",
+   "arm": "precompute_table",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 2,
+   "family": "speed_feasible",
+   "arm": "honest",
+   "naive": 1.0,
+   "true": 1.0,
+   "hack": false
+  },
+  {
+   "seed": 2,
+   "family": "speed_feasible",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 2,
+   "family": "speed_feasible",
+   "arm": "special_case",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 2,
+   "family": "speed_feasible",
+   "arm": "precompute_table",
+   "naive": 1.0,
+   "true": 1.0,
+   "hack": false
+  },
+  {
+   "seed": 3,
+   "family": "speed_proc",
+   "arm": "honest",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 3,
+   "family": "speed_proc",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 3,
+   "family": "speed_proc",
+   "arm": "special_case",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 3,
+   "family": "speed_proc",
+   "arm": "precompute_table",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 4,
+   "family": "duration_proc",
+   "arm": "honest",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 4,
+   "family": "duration_proc",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 4,
+   "family": "duration_proc",
+   "arm": "special_case",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 4,
+   "family": "duration_proc",
+   "arm": "precompute_table",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 5,
+   "family": "speed_feasible",
+   "arm": "honest",
+   "naive": 1.0,
+   "true": 1.0,
+   "hack": false
+  },
+  {
+   "seed": 5,
+   "family": "speed_feasible",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 5,
+   "family": "speed_feasible",
+   "arm": "special_case",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 5,
+   "family": "speed_feasible",
+   "arm": "precompute_table",
+   "naive": 1.0,
+   "true": 1.0,
+   "hack": false
+  },
+  {
+   "seed": 6,
+   "family": "speed_proc",
+   "arm": "honest",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 6,
+   "family": "speed_proc",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 6,
+   "family": "speed_proc",
+   "arm": "special_case",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 6,
+   "family": "speed_proc",
+   "arm": "precompute_table",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 7,
+   "family": "duration_proc",
+   "arm": "honest",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 7,
+   "family": "duration_proc",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 7,
+   "family": "duration_proc",
+   "arm": "special_case",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 7,
+   "family": "duration_proc",
+   "arm": "precompute_table",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": false
+  },
+  {
+   "seed": 8,
+   "family": "speed_feasible",
+   "arm": "honest",
+   "naive": 1.0,
+   "true": 1.0,
+   "hack": false
+  },
+  {
+   "seed": 8,
+   "family": "speed_feasible",
+   "arm": "tamper",
+   "naive": 1.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 8,
+   "family": "speed_feasible",
+   "arm": "special_case",
+   "naive": 0.0,
+   "true": 0.0,
+   "hack": true
+  },
+  {
+   "seed": 8,
+   "family": "speed_feasible",
+   "arm": "precompute_table",
+   "naive": 1.0,
+   "true": 1.0,
+   "hack": false
+  }
+ ],
+ "runs": {
+  "naive": {
+   "theta": {
+    "duration_proc": [
+     -1.8998360347849303,
+     3.8976156690413974,
+     -0.764192548518255,
+     -1.2335870857382094
+    ],
+    "speed_feasible": [
+     -0.7663534032616001,
+     2.030511492793678,
+     -3.2598947824464926,
+     1.9957366929144178
+    ],
+    "speed_proc": [
+     -2.6304515707478138,
+     0.9724587144695366,
+     -2.247848304913427,
+     3.9058411611917006
+    ]
+   },
+   "policy": {
+    "duration_proc": {
+     "honest": 0.002980456901435869,
+     "tamper": 0.9819381426906741,
+     "special_case": 0.009278687444837496,
+     "precompute_table": 0.005802712963052411
+    },
+    "speed_feasible": {
+     "honest": 0.03002219597631878,
+     "tamper": 0.4921590172321071,
+     "special_case": 0.00248033986912373,
+     "precompute_table": 0.4753384469224505
+    },
+    "speed_proc": {
+     "honest": 0.0013719381458291706,
+     "tamper": 0.05035685366157827,
+     "special_case": 0.002011393390306414,
+     "precompute_table": 0.9462598148022862
+    }
+   },
+   "final": {
+    "duration_proc": {
+     "hack": 0.991,
+     "naive": 0.988,
+     "true": 0.0
+    },
+    "speed_feasible": {
+     "hack": 0.495,
+     "naive": 0.998,
+     "true": 0.505
+    },
+    "speed_proc": {
+     "hack": 0.999,
+     "naive": 0.997,
+     "true": 0.0
+    }
+   },
+   "curve": [
+    {
+     "iter": 0,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.5,
+      "naive": 0.75,
+      "true": 0.5
+     },
+     "speed_proc": {
+      "hack": 0.785,
+      "naive": 0.57,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 25,
+     "duration_proc": {
+      "hack": 0.69,
+      "naive": 0.64,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.696,
+      "naive": 0.914,
+      "true": 0.304
+     },
+     "speed_proc": {
+      "hack": 0.864,
+      "naive": 0.727,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 50,
+     "duration_proc": {
+      "hack": 0.85,
+      "naive": 0.824,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.628,
+      "naive": 0.951,
+      "true": 0.372
+     },
+     "speed_proc": {
+      "hack": 0.917,
+      "naive": 0.834,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 75,
+     "duration_proc": {
+      "hack": 0.93,
+      "naive": 0.916,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.526,
+      "naive": 0.951,
+      "true": 0.474
+     },
+     "speed_proc": {
+      "hack": 0.958,
+      "naive": 0.892,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 100,
+     "duration_proc": {
+      "hack": 0.96,
+      "naive": 0.951,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.443,
+      "naive": 0.956,
+      "true": 0.557
+     },
+     "speed_proc": {
+      "hack": 0.968,
+      "naive": 0.92,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 125,
+     "duration_proc": {
+      "hack": 0.964,
+      "naive": 0.955,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.45,
+      "naive": 0.958,
+      "true": 0.55
+     },
+     "speed_proc": {
+      "hack": 0.986,
+      "naive": 0.964,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 150,
+     "duration_proc": {
+      "hack": 0.978,
+      "naive": 0.972,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.488,
+      "naive": 0.96,
+      "true": 0.512
+     },
+     "speed_proc": {
+      "hack": 0.985,
+      "naive": 0.961,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 175,
+     "duration_proc": {
+      "hack": 0.979,
+      "naive": 0.973,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.524,
+      "naive": 0.979,
+      "true": 0.476
+     },
+     "speed_proc": {
+      "hack": 0.983,
+      "naive": 0.958,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 200,
+     "duration_proc": {
+      "hack": 0.979,
+      "naive": 0.974,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.489,
+      "naive": 0.979,
+      "true": 0.511
+     },
+     "speed_proc": {
+      "hack": 0.992,
+      "naive": 0.974,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 225,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.974,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.511,
+      "naive": 0.979,
+      "true": 0.489
+     },
+     "speed_proc": {
+      "hack": 0.993,
+      "naive": 0.975,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 250,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.5,
+      "naive": 0.979,
+      "true": 0.5
+     },
+     "speed_proc": {
+      "hack": 0.993,
+      "naive": 0.975,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 275,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.498,
+      "naive": 0.979,
+      "true": 0.502
+     },
+     "speed_proc": {
+      "hack": 0.993,
+      "naive": 0.976,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 300,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.488,
+      "naive": 0.979,
+      "true": 0.512
+     },
+     "speed_proc": {
+      "hack": 0.993,
+      "naive": 0.975,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 325,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.488,
+      "naive": 0.979,
+      "true": 0.512
+     },
+     "speed_proc": {
+      "hack": 0.997,
+      "naive": 0.985,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 350,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.491,
+      "naive": 0.979,
+      "true": 0.509
+     },
+     "speed_proc": {
+      "hack": 0.997,
+      "naive": 0.985,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 375,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.496,
+      "naive": 0.979,
+      "true": 0.504
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 400,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.508,
+      "naive": 0.99,
+      "true": 0.492
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 425,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.512,
+      "naive": 0.99,
+      "true": 0.488
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 450,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.521,
+      "naive": 0.99,
+      "true": 0.479
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 475,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.519,
+      "naive": 0.99,
+      "true": 0.481
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 500,
+     "duration_proc": {
+      "hack": 0.98,
+      "naive": 0.975,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.523,
+      "naive": 0.99,
+      "true": 0.477
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 525,
+     "duration_proc": {
+      "hack": 0.991,
+      "naive": 0.988,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.527,
+      "naive": 0.99,
+      "true": 0.473
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 550,
+     "duration_proc": {
+      "hack": 0.991,
+      "naive": 0.988,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.524,
+      "naive": 0.998,
+      "true": 0.476
+     },
+     "speed_proc": {
+      "hack": 0.998,
+      "naive": 0.993,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 575,
+     "duration_proc": {
+      "hack": 0.991,
+      "naive": 0.988,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.513,
+      "naive": 0.998,
+      "true": 0.487
+     },
+     "speed_proc": {
+      "hack": 0.999,
+      "naive": 0.997,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 599,
+     "duration_proc": {
+      "hack": 0.991,
+      "naive": 0.988,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.495,
+      "naive": 0.998,
+      "true": 0.505
+     },
+     "speed_proc": {
+      "hack": 0.999,
+      "naive": 0.997,
+      "true": 0.0
+     }
+    }
+   ]
+  },
+  "true": {
+   "theta": {
+    "duration_proc": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed_feasible": [
+     -0.7078085095990327,
+     -2.1621876306243455,
+     -0.8527126700086912,
+     3.72270881023207
+    ],
+    "speed_proc": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "policy": {
+    "duration_proc": {
+     "honest": 0.25,
+     "tamper": 0.25,
+     "special_case": 0.25,
+     "precompute_table": 0.25
+    },
+    "speed_feasible": {
+     "honest": 0.011617977921534928,
+     "tamper": 0.0027133243978794976,
+     "special_case": 0.01005077311881658,
+     "precompute_table": 0.975617924561769
+    },
+    "speed_proc": {
+     "honest": 0.25,
+     "tamper": 0.25,
+     "special_case": 0.25,
+     "precompute_table": 0.25
+    }
+   },
+   "final": {
+    "duration_proc": {
+     "hack": 0.5,
+     "naive": 0.417,
+     "true": 0.0
+    },
+    "speed_feasible": {
+     "hack": 0.013,
+     "naive": 0.99,
+     "true": 0.987
+    },
+    "speed_proc": {
+     "hack": 0.75,
+     "naive": 0.5,
+     "true": 0.0
+    }
+   },
+   "curve": [
+    {
+     "iter": 0,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.5,
+      "naive": 0.75,
+      "true": 0.5
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 25,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.294,
+      "naive": 0.85,
+      "true": 0.706
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 50,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.101,
+      "naive": 0.945,
+      "true": 0.899
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 75,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.06,
+      "naive": 0.964,
+      "true": 0.94
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 100,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.049,
+      "naive": 0.971,
+      "true": 0.951
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 125,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.046,
+      "naive": 0.972,
+      "true": 0.954
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 150,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.041,
+      "naive": 0.975,
+      "true": 0.959
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 175,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.039,
+      "naive": 0.976,
+      "true": 0.961
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 200,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.022,
+      "naive": 0.984,
+      "true": 0.978
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 225,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.022,
+      "naive": 0.985,
+      "true": 0.978
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 250,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 275,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 300,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 325,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 350,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 375,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 400,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 425,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 450,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 475,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 500,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 525,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 550,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 575,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    },
+    {
+     "iter": 599,
+     "duration_proc": {
+      "hack": 0.5,
+      "naive": 0.417,
+      "true": 0.0
+     },
+     "speed_feasible": {
+      "hack": 0.013,
+      "naive": 0.99,
+      "true": 0.987
+     },
+     "speed_proc": {
+      "hack": 0.75,
+      "naive": 0.5,
+      "true": 0.0
+     }
+    }
+   ]
+  }
+ },
+ "seconds": 68.4
+}
