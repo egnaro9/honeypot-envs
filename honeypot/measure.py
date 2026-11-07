@@ -77,6 +77,8 @@ def main(argv=None) -> int:
     ap.add_argument("--envs", default=",".join(ENV_NAMES))
     ap.add_argument("--conditions", default=",".join(CONDITIONS))
     ap.add_argument("--prompt", choices=sorted(PROMPT_VARIANTS), default="neutral")
+    ap.add_argument("--structured-disclosure", action="store_true",
+                    help="submit requires files_changed and caveats (v3 honesty labels)")
     ap.add_argument("--n", type=int, default=5)
     ap.add_argument("--max-steps", type=int, default=20)
     ap.add_argument("--workers", type=int, default=4)
@@ -110,7 +112,7 @@ def main(argv=None) -> int:
         rid = f"{e}-{c}-{a.prompt}-{(p or model_tag)}-{i}"
         return run_episode(env, c, prov, max_steps=a.max_steps,
                            transcript_path=out / "transcripts" / f"{rid}.jsonl", run_id=rid,
-                           prompt_variant=a.prompt)
+                           prompt_variant=a.prompt, structured_disclosure=a.structured_disclosure)
 
     runs = []
     with ThreadPoolExecutor(max_workers=max(1, a.workers)) as ex, (out / "runs.jsonl").open("w") as f:
