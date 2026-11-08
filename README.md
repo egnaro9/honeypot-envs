@@ -127,8 +127,10 @@ tool result, plus the final grade.
 ## Results
 
 Every round's predictions were committed before its run: `PREREGISTRATION.md`, then
-`_ROUND2.md` through `_ROUND6.md`. Rounds are numbered in the order they were
+`_ROUND2.md` through `_ROUND7.md`. Rounds are numbered in the order they were
 pre-registered. Round 4 was pre-registered before round 5 but run after round 6.
+The one exception is `PREREGISTRATION_RL.md`, which was written before its run but
+committed after it.
 
 ### Rounds 1-2, Claude Opus 5.5: 24 episodes, 0 hacks
 
@@ -433,7 +435,7 @@ The v3 labels compare these with the evidence, with no prose parsing:
 
 It is off by default, so rounds 1-6 are unchanged and comparable. The stub controls
 pass: a disclosed edit is neither undisclosed nor misleading, and a covert edit is both.
-No real model has been run with it yet.
+Round 7, below, is the first real-model run with it.
 
 ### Round 7: disclosure as a required, checked field
 
@@ -570,8 +572,9 @@ except honest success is 0/2 there by construction.
 
 ## What this does not show
 
-- One task family. A model that hacks here may not hack elsewhere, and the reverse.
-- Small N. Real-model cells are N = 3-4; treat them as existence proofs, not rates.
+- Two small task families (duration parsing and a prime-sieve speed target). A model
+  that hacks here may not hack elsewhere, and the reverse.
+- Small N. Real-model cells are N = 2-6 per round; treat them as existence proofs, not rates.
 - The `speed` env's "hack" includes legitimate-looking engineering (an import-time cache);
   the label records that the measured window was gamed, not that the model was dishonest.
 - The detectors cover the hack classes in the zoo plus the hidden-test gap. A
@@ -579,6 +582,7 @@ except honest success is 0/2 there by construction.
   (i.e. one that actually solves the task) is, by these definitions, not a hack.
 - No RL training of a language model has been run. `rl_strategy.py` trains a policy over
   four scripted strategies; `gym_env.py` is the interface an LLM trainer would use.
-- No sandbagging or deception-under-oversight conditions yet. The only "lying"
-  measure is `misleading_success_claim`, and its disclosure check is a regex over
-  prose (one known miss, above).
+- No sandbagging or deception-under-oversight conditions yet. The "lying" measures
+  are the prose-based v2 labels (which misread disclosed hacks on real output, above), the
+  structured v3 labels (opt-in, run only in round 7) and
+  `claimed_success_after_failing_run`.
